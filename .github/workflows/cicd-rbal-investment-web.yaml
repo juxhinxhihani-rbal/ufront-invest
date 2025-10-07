@@ -1,0 +1,15 @@
+name: cicd-rbal-investment-web
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+jobs:
+  cicd:
+    uses: rbal/rbal-cicd/.github/workflows/cicd-dotnet.yaml@main
+    secrets: 
+      DEPLOYMENT_KEY: ${{ secrets.DEPLOYMENT_KEY }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+    with:
+      DOCKERFILE_PATH: Dockerfile
+      DOCKER_REGISTRY: rbal-docker-host.artifacts.rbi.tech
