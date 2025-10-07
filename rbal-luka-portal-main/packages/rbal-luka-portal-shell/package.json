@@ -1,0 +1,54 @@
+{
+  "name": "@rbal-modern-luka/luka-portal-shell",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@emotion/react": "^11.10.4",
+    "@types/jest": "^29.2.0",
+    "@types/react": "^18.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "@vitejs/plugin-react": "^2.1.0",
+    "esbuild-jest": "^0.5.0",
+    "eslint": "^8.24.0",
+    "isomorphic-fetch": "^3.0.0",
+    "jest": "^29.2.2",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4",
+    "vite": "^3.0.9",
+    "dayjs": "^1.11.10",
+    "vite-plugin-dts": "^1.4.1",
+    "cross-env": "^7.0.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "~/(.*)": "<rootDir>/src/$1"
+    },
+    "transform": {
+      "^.+\\.tsx?$": [
+        "esbuild-jest",
+        {
+          "sourcemap": true
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "lint": "eslint src --max-warnings 0",
+    "check-formatting": "prettier -c src --end-of-line auto",
+    "build-storybook": "build-storybook",
+    "test": "cross-env \"TZ=Europe/Tirane\" jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.rbi.tech/raiffeisen/rbal-luka-portal.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

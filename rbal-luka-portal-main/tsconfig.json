@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": ".",
+    "paths": {
+      "~rbal-luka-portal-shell/*": ["./packages/rbal-luka-portal-shell/src/*"],
+      "~rbal-luka-ufront-starter/*": [
+        "./packages/rbal-luka-ufront-starter/src/*"
+      ],
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "src",
+    "proxyConfigs.ts",
+    "moduleConfigs.types.ts",
+    "vite.config.ts",
+    "packages/rbal-luka-portal-shell/src",
+    "packages/rbal-luka-portal-shell/vite.config.ts",
+    "packages/rbal-luka-ufront-starter/src",
+    "packages/rbal-luka-ufront-starter/vite.config.ts"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
