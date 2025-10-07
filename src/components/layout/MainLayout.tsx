@@ -1,15 +1,9 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
-import { usePathname } from 'next/navigation';
+import { useLocation } from 'react-router-dom';
 import Sidebar from "./Sidebar";
-import { useSession } from "next-auth/react";
-import { decodeAccessToken } from "@/utils/decodeAccessToken";
 import Header from "./Header";
 import { useLanguage } from "@/context/languageContext";
 import { useSidebar } from "@/context/sidebarContext";
-import { useHasExchangeScreenPermission, useHasNoRoles, useHasUploadPermission, useHasReportTablePermission, useHasQuestionnaireScreenPermission, useShouldShowAccessDenied, useHasMenuInvestAdminPermission } from "@/hooks/useUserRoles";
-import AccessDenied from "@/components/helper/AccessDeniedScreen";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -41,7 +35,8 @@ export default function MainLayout({
     setHideSidebar(hideSidebar);
   }, [hideSidebar, setHideSidebar]);
 
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
   const { t } = useLanguage();
   const isUploadFile = pathname?.includes('uploadFile');
   const isQuestionnaire = pathname?.includes('questionnaire');
@@ -56,13 +51,11 @@ export default function MainLayout({
     "/": 'dashboard.title'
   };
 
-  const canUploadFile = useHasUploadPermission();
-  const canViewExchange = useHasExchangeScreenPermission();
-  const canViewReportsTable = useHasReportTablePermission();
-  const canViewQuestionnaire = useHasQuestionnaireScreenPermission();
-  const canViewFundConfiguration = useHasMenuInvestAdminPermission();
-  const hasNoRoles = useHasNoRoles();
-  const shouldShowAccessDenied = useShouldShowAccessDenied();
+  const canUploadFile = true;
+  const canViewExchange = true;
+  const canViewReportsTable = true;
+  const canViewQuestionnaire = true;
+  const canViewFundConfiguration = true;
 
   const matchedRoute = Object.keys(subtitleMap).find((route) => {
     if (route === "/") {
@@ -77,10 +70,6 @@ export default function MainLayout({
 
   // 🔹 Translate key -> string
   const currentSubtitle = t(currentSubtitleKey);
-
-  if (shouldShowAccessDenied) {
-    return <AccessDenied />;
-  }
 
   return (
     <div

@@ -1,10 +1,7 @@
-"use client";
 import React from "react";
 import {X, Menu, Table, ChevronLeft} from "lucide-react";
-import Link from "next/link";
-import {usePathname, useRouter} from "next/navigation";
+import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/context/languageContext";
-import { useHasMenuInvestAdminPermission } from "@/hooks/useUserRoles";
 
 interface SidebarProps {
 
@@ -21,7 +18,7 @@ interface SidebarProps {
 import {TrendingUp, FileText, Upload, FileQuestion, FolderKanban} from "lucide-react";
 
 export default function Sidebar({collapsed, onToggle, canUploadFile, canViewExchange, canViewReportsTable, canViewQuestionnaire, canViewFundConfiguration }: SidebarProps) {
-    const router = useRouter();
+    const location = useLocation();
     const { t, language, setLanguage } = useLanguage();
     
     // Define links with translation keys
@@ -54,8 +51,8 @@ export default function Sidebar({collapsed, onToggle, canUploadFile, canViewExch
     if (!canViewFundConfiguration) {
         filteredLinks = filteredLinks.filter(link => link.href !== "/fundConfiguration");
     }
-    
-    const pathname = usePathname();
+
+    const pathname = location.pathname;
     return (
         <>
             {/* Sidebar */}
@@ -92,7 +89,7 @@ export default function Sidebar({collapsed, onToggle, canUploadFile, canViewExch
                             return (
                                 <div key={link.href} className="relative group">
                                     <Link
-                                        href={link.href}
+                                        to={link.href}
                                         className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors ${
                                             isActive
                                                 ? 'bg-yellow-100 text-yellow-600'
@@ -115,7 +112,7 @@ export default function Sidebar({collapsed, onToggle, canUploadFile, canViewExch
                         return (
                             <Link
                                 key={link.href}
-                                href={link.href}
+                                to={link.href}
                                 className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-colors font-medium ${
                                     isActive
                                         ? 'bg-yellow-100 text-yellow-600'

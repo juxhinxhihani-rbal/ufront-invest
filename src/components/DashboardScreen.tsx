@@ -1,18 +1,10 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { TrendingUp, Upload, Table, FileQuestion, ArrowRight, FolderKanban } from "lucide-react";
 import { useLanguage } from "@/context/languageContext";
-import { useHasNoRoles } from '@/hooks/useUserRoles';
 import FundPerformanceGraph from './FundPerformanceGraph';
 
-interface DashboardScreenProps {
-    canUploadFile?: boolean;
-    canViewExchange?: boolean;
-    canViewReportsTable?: boolean;
-    canViewQuestionnaire?: boolean;
-}
+interface DashboardScreenProps {}
 
 interface MenuCard {
     href: string;
@@ -43,15 +35,14 @@ interface FundPerformanceData {
     }[];
 }
 
-export default function DashboardScreen({
-    canUploadFile = true,
-    canViewExchange = true,
-    canViewReportsTable = true,
-    canViewQuestionnaire = true
-}: DashboardScreenProps) {
+export default function DashboardScreen({}: DashboardScreenProps) {
     const { t } = useLanguage();
     const [fundPerformanceData, setFundPerformanceData] = useState<FundPerformanceData | null>(null);
-    const hasFundPerformanceRole = !useHasNoRoles();
+    const canUploadFile = true;
+    const canViewExchange = true;
+    const canViewReportsTable = true;
+    const canViewQuestionnaire = true;
+    const hasFundPerformanceRole = true;
 
     // Define menu cards with all their properties
     const menuCards: MenuCard[] = [
